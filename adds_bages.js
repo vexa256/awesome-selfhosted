@@ -23,6 +23,6 @@ const readline = require('readline');
       bage = ''
     }
 
-    await fsPromises.writeFile(outfile, line + bage + os.EOL);
+    await fsPromises.writeFile(outfile, bage + line + os.EOL);
   }
 })()
