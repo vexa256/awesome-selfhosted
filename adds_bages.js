@@ -18,7 +18,7 @@ const readline = require('readline');
     let bage;
 
     if (m && m[1] && m[2]) {
-      bage = ` ![](https://img.shields.io/github/stars/${m[1]}/${m[2]}.svg?label=Stars&style=social?style=popout)`  
+      bage = `![](https://img.shields.io/github/stars/${m[1]}/${m[2]}.svg?label=Stars&style=social?style=popout) `  
     } else {
       bage = ''
     }
