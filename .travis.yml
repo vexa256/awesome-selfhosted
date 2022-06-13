@@ -3,18 +3,18 @@ language: node_js
 node_js:
   - "node"
 
-before_install:
-  - rvm install 2.2
-  - gem install awesome_bot
-  - gem install danger
+cache:
+  npm: false
 
-before_script:
-  
+before_install:
+  - rvm install 2.6.2
+  - gem install awesome_bot
+  - sudo apt update && sudo apt install python3-pip python3-setuptools
+  - cd tests && npm install chalk && cd ..
+
 script:
-  - git diff master.. -U0 README.md | grep -Pos "(?<=^\+).*" >> temp.md || (exit 0)
-  - node test.js temp.md
-  - awesome_bot temp.md --allow-redirect || (exit 0)
-  - danger --verbose
+  - 'if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_EVENT_TYPE" == "cron" ]]; then make check_all; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then make check_pr; fi'
 
 notifications:
   email: false
